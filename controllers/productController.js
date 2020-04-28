@@ -25,18 +25,33 @@ const addproduct = (req, res) => {
 };
 
 const fetchProduct = (req, res) => {
-  Product.find()
-    .then((results) => {
-      res.status(200).json({
-        message: "product fetched sucessfully",
-        data: results,
+  if (req.params.id) {
+    Product.findById(req.params.id)
+      .then((results) => {
+        res.status(200).json({
+          message: "product fetched sucessfully",
+          data: results,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: err.errmsg,
+        });
       });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err.errmsg,
+  } else {
+    Product.find()
+      .then((results) => {
+        res.status(200).json({
+          message: "products fetched sucessfully",
+          data: results,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: err.errmsg,
+        });
       });
-    });
+  }
 };
 
 const deleteProduct = (req, res) => {
