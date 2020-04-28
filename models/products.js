@@ -10,17 +10,4 @@ const productSchema = mongoose.Schema({
 
 const Product = mongoose.model("Product", productSchema);
 
-// class Product {
-//   constructor(title, price, description) {
-//     this.title = title;
-//     this.price = price;
-//     this.description = description;
-//   }
-
-//   save() {
-//     const db = getDBConnect();
-//     return db.collection("products").insertOne(this);
-//   }
-// }
-
 module.exports = Product;
