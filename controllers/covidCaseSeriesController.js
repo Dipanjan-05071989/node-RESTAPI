@@ -1,21 +1,35 @@
 const covidCaseTimeSeries = require("../models/covid_caseTimeSeries");
 
-const fetchaddSeries = (req, res) => {
+const fetchaddSeries = (req, res, next) => {
   const timeSeries = new covidCaseTimeSeries(res.locals.data);
-  timeSeries
-    .save()
-    .then((result) => {
-      console.log(result);
+  covidCaseTimeSeries
+    .find()
+    .then((checkedData) => {
+      console.log(checkedData);
+      if (checkedData.length === 0) {
+        timeSeries
+          .save()
+          .then((result) => {
+            // console.log(result);
+            res.status(200).json({
+              message: "product added sucessfully",
+              data: {},
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+              message: err.errmsg,
+            });
+          });
+      }
       res.status(200).json({
-        message: "product added sucessfully",
-        data: {},
+        message: "Data is already there",
+        data: checkedData,
       });
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json({
-        message: err.errmsg,
-      });
     });
 };
 module.exports = {
