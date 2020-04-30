@@ -5,15 +5,15 @@ const fetchaddSeries = (req, res, next) => {
   covidCaseTimeSeries
     .find()
     .then((checkedData) => {
-      console.log(checkedData);
-      if (checkedData.length === 0) {
+      // console.log(!checkedData.length);
+      if (!checkedData.length) {
         timeSeries
           .save()
           .then((result) => {
             // console.log(result);
             res.status(200).json({
               message: "product added sucessfully",
-              data: {},
+              status: 1,
             });
           })
           .catch((err) => {
@@ -22,11 +22,13 @@ const fetchaddSeries = (req, res, next) => {
               message: err.errmsg,
             });
           });
+      } else {
+        res.status(200).json({
+          message: "Data is already there",
+          data: checkedData,
+          status: 4,
+        });
       }
-      res.status(200).json({
-        message: "Data is already there",
-        data: checkedData,
-      });
     })
     .catch((err) => {
       console.log(err);
