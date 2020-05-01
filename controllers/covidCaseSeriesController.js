@@ -1,6 +1,8 @@
 const covidCaseTimeSeries = require("../models/covid_caseTimeSeries");
+const userAccess = require("../models/User");
 
 const fetchaddSeries = (req, res, next) => {
+  console.log(res.locals.data);
   const timeSeries = new covidCaseTimeSeries(res.locals.data);
   covidCaseTimeSeries
     .find()
