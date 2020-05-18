@@ -7,9 +7,7 @@ loginorRegisterRouter.get(
   "/api/addproduct",
   timeseriesController.fetchaddSeries
 );
-loginorRegisterRouter.post(
-  "/api/registerLogin",
-  userController.registerOrLogin
-);
+loginorRegisterRouter.post("/userApi/register", userController.register);
+loginorRegisterRouter.post("/userApi/login", userController.login);
 
 module.exports = loginorRegisterRouter;
