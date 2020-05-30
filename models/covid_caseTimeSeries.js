@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = require("mongoose");
 
+
 const user = require("./User");
+
 
 const listSchema = new mongoose.Schema({
   dailyconfirmed: { type: String, required: true },
@@ -13,12 +15,23 @@ const listSchema = new mongoose.Schema({
   totalrecovered: { type: String, required: true },
 });
 
+
+const checkDataValidity = (value) => {
+
 const checkData = (value) => {
+
   return value.length > 0;
 };
 
 const covidCaseTimeSeriesSchema = new mongoose.Schema({
   cases_time_series: {
+
+    type: [listSchema],
+    required: true,
+    validate: [checkDataValidity, "The array cannot be empty"],
+  },
+  useraccess: [{ type: Schema.Types.ObjectId, ref: "User" }],
+
     type: {
       listSchema: {
         type: Array,

@@ -7,9 +7,14 @@ loginorRegisterRouter.get(
   "/api/addproduct",
   timeseriesController.fetchaddSeries
 );
+
+loginorRegisterRouter.post("/userApi/register", userController.register);
+loginorRegisterRouter.post("/userApi/login", userController.login);
+
 loginorRegisterRouter.post(
   "/api/registerLogin",
   userController.registerOrLogin
 );
+
 
 module.exports = loginorRegisterRouter;

@@ -2,7 +2,8 @@
   "name": "covid19",
   "version": "0.0.0",
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "start:dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "axios": "^0.19.2",
